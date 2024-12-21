@@ -6,11 +6,13 @@
         </div>
         <div class="form-field">
             <label for="label">Label:</label>
-            <input v-model="label" id="label" type="text" placeholder="Enter label" />
+            <input ref="labelInput" v-model="label" id="label" type="text" placeholder="Enter label" />
         </div>
-        <div class="form-field">
-            <label for="source">Source:</label>
-            <input v-model="source" id="source" type="text" placeholder="Enter source" />
+        <div class="form-field checkbox">
+            <label>
+                <input type="checkbox" v-model="isAnonymous" />
+                Upload anonymously
+            </label>
         </div>
         <div class="popup-actions">
             <Button text="Save" buttonClass="accent-btn" @click="saveImage" />
@@ -20,7 +22,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, inject, watch } from "vue";
+
+const userContext = inject("userContext");
+if (!userContext) {
+    console.error("userContext is undefined. Make sure it is provided at a higher level.");
+}
 
 const props = defineProps({
     file: {
@@ -34,13 +41,33 @@ const emit = defineEmits(["close", "save"]);
 
 // Local data
 const label = ref("");
-const source = ref("");
+const isAnonymous = ref(false);
+const labelInput = ref(null);
+
+// Watch the file prop and set the label to the file name when the file changes
+watch(
+    () => props.file,
+    (newFile) => {
+        if (newFile) {
+            label.value = newFile.name.split(".")[0]; // Set label to file name without extension
+        }
+    },
+    { immediate: true }
+);
+
+onMounted(() => {
+    if (labelInput.value) {
+        labelInput.value.focus();
+    }
+});
 
 const saveImage = () => {
+    const source = isAnonymous.value ? "Anonymous" : userContext.name;
+
     emit("save", {
         file: props.file,
         label: label.value,
-        source: source.value,
+        source,
     });
 };
 

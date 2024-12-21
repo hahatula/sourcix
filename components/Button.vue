@@ -2,13 +2,13 @@
     <button
       :class="'generic-button ' + buttonClass"
       @click="handleClick"
+      :type="type"
     >
       {{ text }}
     </button>
   </template>
   
   <script setup>
-  import { defineProps } from 'vue';
   import "~/assets/css/button.css";
   
   const props = defineProps({
@@ -22,7 +22,10 @@
     },
     onClick: {
       type: Function,
-      required: true,
+    },
+    type: {
+      type: String,
+      default: 'button',
     },
   });
   

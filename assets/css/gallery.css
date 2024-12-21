@@ -41,6 +41,13 @@
   font-weight: 600;
 }
 
+.file-loader {
+  position: fixed;
+  top: 80px;
+  left: 10px;
+  z-index: 1000;
+}
+
 @keyframes highlightAnimation {
   from {
     width: 0%;
