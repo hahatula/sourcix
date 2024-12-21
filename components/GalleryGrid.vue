@@ -25,17 +25,23 @@
 <script setup>
 import { ref, computed } from "vue";
 import "~/assets/css/gallery-grid.css";
-import { images } from '~/assets/tempdata/images.vue';
+
+const props = defineProps({
+    images: {
+        type: Array,
+        required: true,
+    },
+});
 
 const selectedSource = ref("");
 const selectedLabel = ref("");
 
 const sources = computed(() => {
-    return [...new Set(images.value.map(image => image.source))];
+    return [...new Set(props.images.map(image => image.source))];
 });
 
 const filteredImages = computed(() => {
-    return images.value.filter((image) => {
+    return props.images.filter((image) => {
         const matchesSource =
             selectedSource.value === "" || image.source === selectedSource.value;
         const matchesLabel =

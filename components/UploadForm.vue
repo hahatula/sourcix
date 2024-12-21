@@ -13,7 +13,7 @@
             <input v-model="source" id="source" type="text" placeholder="Enter source" />
         </div>
         <div class="popup-actions">
-            <Button text="Save" buttonClass="accent-btn" @click="saveImage" />
+            <Button text="Save" buttonClass="accent-btn" />
             <Button text="Cancel" @click="closeForm" />
         </div>
     </form>

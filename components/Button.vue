@@ -8,7 +8,7 @@
   </template>
   
   <script setup>
-  import { defineProps } from 'vue';
+  // import { defineProps } from 'vue';
   import "~/assets/css/button.css";
   
   const props = defineProps({
