@@ -1,0 +1,28 @@
+.generic-button {
+  flex-shrink: 0;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #dedfe4;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.generic-button:hover {
+  background-color: #c8c9d2;
+}
+
+.generic-button.accent-btn {
+  background-color: var(--accent-color);
+}
+
+.generic-button.accent-btn:hover {
+  background-color: #a2e700;
+}
+
+@media (max-width: 1800px) {
+  .generic-button {
+    height: 34px;
+  }
+}

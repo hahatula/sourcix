@@ -1,0 +1,65 @@
+.gallery {
+  --highlight-size: calc(100% + 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 90px - 60px - 90px);
+  margin-top: 90px;
+  background: linear-gradient(180deg, var(--secondary-color) 60%, #fff 89%);
+}
+
+.gallery h1 {
+  max-width: 680px;
+  margin: 40px 0;
+  text-align: center;
+}
+
+.gallery .highlighted {
+  position: relative;
+  font-size: inherit;
+}
+
+.highlight {
+  position: absolute;
+  width: var(--highlight-size);
+  height: 100%;
+  top: 0;
+  left: -20px;
+  transform-origin: center left;
+  animation: highlightAnimation 1s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+
+.highlight-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery .accent {
+  position: relative;
+  font-size: inherit;
+  font-weight: 600;
+}
+
+@keyframes highlightAnimation {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--highlight-size);
+  }
+}
+
+@media (max-width: 1800px) {
+  .gallery {
+    --highlight-size: calc(100% + 36px);
+    min-height: calc(100vh - 90px - 60px - 78px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .gallery {
+    --highlight-size: calc(100% + 30px);
+    min-height: calc(100vh - 90px - 60px - 60px);
+  }
+}

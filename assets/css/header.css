@@ -1,0 +1,31 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90px;
+  background-color: #fff;
+}
+
+.header .logo-link {
+  height: 50%;
+  padding-top: 10px;
+}
+
+.header .logo {
+  height: 100%;
+}
+
+@media (max-width: 1800px) {
+  .header {
+    height: 78px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header {
+    height: 60px;
+  }
+}
