@@ -13,17 +13,10 @@
         <div v-if="isLoading" class="gallery-content spinner">
             Loading images...
         </div>
-        <GalleryGrid
-            v-else
-            :images="images"
-            :sources="sources"
-            :selectedSource="selectedSource"
-            :selectedLabel="selectedLabel"
-            :page="page"
-            :totalPages="totalPages"
-            @applyFilters="applyFilters"
-            @changePage="changePage"
-        />
+        <GalleryGrid v-else :images="images" :sources="sources" :selectedSource="selectedSource"
+            :selectedLabel="selectedLabel" :page="page" :totalPages="totalPages" @applyFilters="applyFilters"
+            @changePage="changePage" />
+        <div v-if="isUploading" class="file-loader spinner">Uploading...</div>
 
         <Teleport to="body">
             <Popup v-if="popupVisible" title="Upload Image" @close="closePopup">
@@ -43,6 +36,7 @@ const selectedFile = ref(null);
 const images = ref([]);
 const sources = ref([]);
 const isLoading = ref(false);
+const isUploading = ref(false);
 
 const page = ref(1);
 const limit = ref(20);
@@ -102,6 +96,9 @@ const handleSaveImage = async ({ file, label, source }) => {
     formData.append("label", label);
     formData.append("source", source);
 
+    closePopup();
+    isUploading.value = true;
+
     try {
         const response = await fetch("/api/upload", {
             method: "POST",
@@ -112,17 +109,14 @@ const handleSaveImage = async ({ file, label, source }) => {
         console.log("Upload result:", result);
 
         if (response.ok) {
-            alert("Image uploaded successfully!");
             applyFilters({ source: selectedSource.value, label: selectedLabel.value });
         } else {
-            alert(`Failed to upload image: ${result.message}`);
+            throw new Error(`Failed to upload image: ${result.message}`);
         }
     } catch (error) {
         console.error("Error uploading image:", error);
-        alert("An error occurred during the upload.");
     } finally {
-        popupVisible.value = false;
-        selectedFile.value = null;
+        isUploading.value = false;
     }
 };
 
