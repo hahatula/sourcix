@@ -20,8 +20,9 @@ const props = defineProps({
     },
 });
 
-const userName = "Olga Golubev";
-const userEmail = "your.email@example.com";
+const userContext = inject("userContext");
+const userName = userContext.name;
+const userEmail = userContext.email;
 
 const onError = (event) => {
     event.target.src = '/avatar-placeholder.svg';

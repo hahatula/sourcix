@@ -47,3 +47,16 @@
   display: flex;
   gap: 20px;
 }
+
+.popup-form .form-field.checkbox label{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.popup-form .form-field.checkbox input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent-color);
+}

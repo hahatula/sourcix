@@ -14,10 +14,6 @@ export default defineEventHandler(async (event) => {
 
   return new Promise((resolve, reject) => {
     form.parse(event.node.req, async (err, fields, files) => {
-      console.log('Parsing form data...');
-      console.log('Fields:', fields);
-      console.log('Files:', files);
-
       if (err) {
         console.error('Error parsing form data:', err);
         reject(
@@ -37,11 +33,18 @@ export default defineEventHandler(async (event) => {
         return;
       }
 
+      const source = fields.source || 'Anonymous';
+      const label = fields.label || 'No Label';
+
       try {
         const filePath = files.file[0].filepath; // Доступ к первому файлу
         console.log('Uploading file to Cloudinary:', filePath);
         const uploadResult = await cloudinary.uploader.upload(filePath, {
           folder: 'sourcix',
+          context: {
+            source: source,
+            label: label,
+          },
         });
 
         console.log('Upload result:', uploadResult);
