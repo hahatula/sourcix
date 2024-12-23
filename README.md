@@ -1,5 +1,9 @@
 # SOURCIX Image Gallery
 
+## Check the demo online
+
+https://gallery-demo-nuxt.vercel.app/
+
 ## Setup
 
 Make sure to install dependencies:
