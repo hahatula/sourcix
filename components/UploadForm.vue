@@ -36,10 +36,9 @@ const props = defineProps({
     },
 });
 
-// Emits for passing events up
+// Emits - methods for passing events up
 const emit = defineEmits(["close", "save"]);
 
-// Local data
 const label = ref("");
 const isAnonymous = ref(false);
 const labelInput = ref(null);
@@ -55,6 +54,7 @@ watch(
     { immediate: true }
 );
 
+// Focus on the input to make it easy to edit
 onMounted(() => {
     if (labelInput.value) {
         labelInput.value.focus();

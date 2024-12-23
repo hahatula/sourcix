@@ -39,7 +39,6 @@ const props = defineProps({
     page: { type: Number, required: true },
     totalPages: { type: Number, required: true },
 });
-console.log(props);
 
 const emit = defineEmits(["applyFilters", "changePage"]);
 
