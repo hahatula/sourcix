@@ -1,7 +1,8 @@
+<!-- Nuxt docs: If you only have a single layout in your application, we recommend using app.vue with <NuxtPage /> instead of Layouts. -->
 <template>
   <div class="app">
     <Header />
-    <Gallery />
+    <NuxtPage />
     <Footer />
   </div>
 </template>

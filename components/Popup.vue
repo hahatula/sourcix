@@ -18,6 +18,7 @@ const props = defineProps({
     subtitle: {
         type: String,
         required: false,
+        default: "",
     },
 });
 

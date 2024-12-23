@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "Vue.volar"
+  "editor.defaultFormatter": "Vue.volar",
+  "prettier.singleAttributePerLine": true,
+  "prettier.singleQuote": true
 }

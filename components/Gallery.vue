@@ -9,6 +9,7 @@
             </span> images to&nbsp;the&nbsp;SOURCIX Gallery
         </h1>
         <Button text="Upload" buttonClass="accent-btn" @click="triggerFileInput" />
+        <!-- Hidden file input for to make the button open the file chooser immediately -->
         <input type="file" ref="fileInput" style="display: none" @change="handleFileSelected" accept="image/*" />
         <div v-if="isLoading" class="gallery-content spinner">
             Loading images...
@@ -29,6 +30,7 @@
 <script setup>
 import "~/assets/css/gallery.css";
 import { ref } from "vue";
+import { fetchImages, uploadImage } from "~/composables/useGallery";
 
 const fileInput = ref(null);
 const popupVisible = ref(false);
@@ -46,12 +48,12 @@ const selectedLabel = ref("");
 
 const totalPages = computed(() => Math.ceil(total.value / limit.value));
 
-const fetchImages = async () => {
+// Logic for showing images
+const getImages = async () => {
     isLoading.value = true;
     try {
-        const response = await fetch(`/api/images?page=${page.value}&limit=${limit.value}&source=${selectedSource.value}&label=${selectedLabel.value}`);
-        const data = await response.json();
-        images.value = data.images; // Assuming the API returns an object with an 'images' array
+        const data = await fetchImages(page.value, limit.value, selectedSource.value, selectedLabel.value);
+        images.value = data.images;
         total.value = data.total;
         sources.value = data.allSources;
     } catch (error) {
@@ -66,19 +68,21 @@ const applyFilters = ({ source = "", label = "" }) => {
     selectedSource.value = source;
     selectedLabel.value = label;
     page.value = 1;
-    fetchImages();
+    getImages();
 };
 
 const changePage = (newPage) => {
     page.value = newPage;
-    fetchImages();
+    getImages();
 };
 
 onMounted(() => {
-    fetchImages(); // Fetch images when the component is mounted
+    getImages(); // Fetch images when the component is mounted
 });
 
+// Logic for uploading images
 const triggerFileInput = () => {
+    // immitate user click on the input
     fileInput.value.click();
 };
 
@@ -91,28 +95,13 @@ const handleFileSelected = (event) => {
 };
 
 const handleSaveImage = async ({ file, label, source }) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("label", label);
-    formData.append("source", source);
-
     closePopup();
     isUploading.value = true;
 
     try {
-        const response = await fetch("/api/upload", {
-            method: "POST",
-            body: formData,
-        });
-
-        const result = await response.json();
+        const result = await uploadImage(file, label, source);
         console.log("Upload result:", result);
-
-        if (response.ok) {
-            applyFilters({ source: selectedSource.value, label: selectedLabel.value });
-        } else {
-            throw new Error(`Failed to upload image: ${result.message}`);
-        }
+        applyFilters({ source: selectedSource.value, label: selectedLabel.value });
     } catch (error) {
         console.error("Error uploading image:", error);
     } finally {
@@ -123,5 +112,6 @@ const handleSaveImage = async ({ file, label, source }) => {
 const closePopup = () => {
     popupVisible.value = false;
     selectedFile.value = null;
+    fileInput.value.value = ""; // reset the input to ensure form opening after canceling
 };
 </script>
