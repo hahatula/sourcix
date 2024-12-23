@@ -18,6 +18,7 @@
             :selectedLabel="selectedLabel" :page="page" :totalPages="totalPages" @applyFilters="applyFilters"
             @changePage="changePage" />
         <div v-if="isUploading" class="file-loader spinner">Uploading...</div>
+        <div v-if="isError" class="file-loader error">Error occurred while uploading image</div>
 
         <Teleport to="body">
             <Popup v-if="popupVisible" title="Upload Image" @close="closePopup">
@@ -39,6 +40,7 @@ const images = ref([]);
 const sources = ref([]);
 const isLoading = ref(false);
 const isUploading = ref(false);
+const isError = ref(false);
 
 const page = ref(1);
 const limit = ref(20);
@@ -104,6 +106,10 @@ const handleSaveImage = async ({ file, label, source }) => {
         applyFilters({ source: selectedSource.value, label: selectedLabel.value });
     } catch (error) {
         console.error("Error uploading image:", error);
+        isError.value = true;
+        setTimeout(() => {
+            isError.value = false;
+        }, 3000);
     } finally {
         isUploading.value = false;
     }

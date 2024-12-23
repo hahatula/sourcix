@@ -1,6 +1,6 @@
 <template>
   <header class="header content-container">
-    <a class="logo-link" href="https://sourcixai.com/">
+    <a class="logo-link" href="https://sourcixai.com/" target="_blank">
       <img class="logo" src="/assets/images/sx-logo.svg" alt="Logo" />
     </a>
     <UserInfo />

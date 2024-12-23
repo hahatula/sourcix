@@ -13,6 +13,10 @@
   background-color: #c8c9d2;
 }
 
+.generic-button:disabled {
+  opacity: 0.5;
+}
+
 .generic-button.accent-btn {
   background-color: var(--accent-color);
 }

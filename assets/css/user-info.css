@@ -10,6 +10,7 @@
 
 .user-info-details .name {
   font-weight: 500;
+  cursor: pointer;
 }
 
 .user-info-details .email {

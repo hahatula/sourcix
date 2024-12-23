@@ -48,6 +48,17 @@
   z-index: 1000;
 }
 
+.file-loader.error {
+  padding: 10px;
+  margin: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--error-color);
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--error-color);
+}
+
 @keyframes highlightAnimation {
   from {
     width: 0%;

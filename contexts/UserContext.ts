@@ -1,6 +1,6 @@
 import { reactive } from "vue";
 
 export const userContext = reactive({
-  name: "Mr. Smith",
+  name: "Olga Golubev",
   email: "your.email@example.com",
 });
