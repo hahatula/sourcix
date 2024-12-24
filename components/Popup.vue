@@ -4,8 +4,10 @@
             <h2>{{ title }}</h2>
             <p v-if="subtitle">{{ subtitle }}</p>
             <slot></slot>
+            <button @click="emit('close')" class="popup-close" />
         </div>
     </div>
+
 </template>
 
 <script setup>
@@ -23,4 +25,21 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["close"]);
+
+// Add event listener for keydown
+const handleKeydown = (event) => {
+    if (event.key === 'Escape') {
+        emit('close');
+    }
+};
+
+// Attach event listener on mount
+onMounted(() => {
+    window.addEventListener('keydown', handleKeydown);
+});
+
+// Clean up event listener on unmount
+onBeforeUnmount(() => {
+    window.removeEventListener('keydown', handleKeydown);
+});
 </script>
