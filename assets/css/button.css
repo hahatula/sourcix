@@ -25,6 +25,13 @@
   background-color: #a2e700;
 }
 
+.generic-button.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0.8;
+}
+
 @media (max-width: 1800px) {
   .generic-button {
     height: 34px;

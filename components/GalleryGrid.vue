@@ -19,10 +19,13 @@
         <div v-else class="gallery-grid">
             <GalleryItem v-for="(image, index) in images" :key="index" :image="image" />
         </div>
-        <div v-if="totalPages > 1" class="gallery-pagination">
+        <!-- <div v-if="totalPages > 1" class="gallery-pagination">
             <Button text="<" @click="$emit('changePage', page - 1)" :disabled="page === 1" />
             <span>Page {{ page }} of {{ totalPages }}</span>
             <Button text=">" @click="$emit('changePage', page + 1)" :disabled="page === totalPages" />
+        </div> -->
+        <div v-if="isLoading" class="gallery-content spinner">
+            Loading images...
         </div>
     </div>
 </template>
@@ -38,6 +41,7 @@ const props = defineProps({
     selectedLabel: { type: String, required: true },
     page: { type: Number, required: true },
     totalPages: { type: Number, required: true },
+    isLoading: { type: Boolean, required: true },
 });
 
 const emit = defineEmits(["applyFilters", "changePage"]);
