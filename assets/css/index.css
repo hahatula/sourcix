@@ -79,6 +79,7 @@ select:focus-visible {
   border-top-color: var(--accent-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  flex-shrink: 0;
 }
 
 @keyframes spin {
