@@ -67,6 +67,7 @@ select:focus-visible {
   align-items: center;
   color: var(--primary-color);
   height: 100px;
+  flex-shrink: 0;
 }
 
 .spinner::before {
