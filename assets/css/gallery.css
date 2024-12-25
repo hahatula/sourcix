@@ -31,7 +31,7 @@
 
 .highlight-svg {
   width: 100%;
-  height: 100%;
+  height: calc(var(--h1-size) * 1.5);
   object-fit: cover;
 }
 
