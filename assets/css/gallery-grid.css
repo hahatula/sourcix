@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
   width: 100%;
   margin: 40px 0;
 }
@@ -16,6 +17,7 @@
 }
 
 .gallery-filter {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -28,6 +30,20 @@
 .gallery-filter select,
 .gallery-filter input {
   min-width: 200px;
+  -webkit-appearance: none;
+  border-radius: 0;
+  padding-right: 30px;
+}
+
+.gallery-filter:has(select)::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -2px;
+  border-top: 6px solid black;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
 }
 
 .gallery-grid {

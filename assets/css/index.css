@@ -8,6 +8,7 @@
   --error-color: #fb6c02;
 
   --base-font-size: 14px;
+  --h1-size: 40px;
 }
 
 * {
@@ -27,7 +28,7 @@ h4 {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: var(--h1-size);
 }
 
 h4 {
@@ -86,8 +87,8 @@ select:focus-visible {
 }
 
 @media (max-width: 1800px) {
-  h1 {
-    font-size: 34px;
+  :root {
+    --h1-size: 34px;
   }
   .content-container {
     padding: 0 43px;
@@ -95,8 +96,8 @@ select:focus-visible {
 }
 
 @media (max-width: 1024px) {
-  h1 {
-    font-size: 24px;
+  :root {
+    --h1-size: 24px;
   }
   .content-container {
     padding: 0 20px;
