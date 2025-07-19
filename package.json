@@ -19,7 +19,7 @@
     "eslint": "^9.17.0",
     "formidable": "^3.5.4",
     "mongodb": "^6.12.0",
-    "nuxt": "^3.14.1592",
+    "nuxt": "^3.17.7",
     "pinia": "^2.3.0",
     "vue": "latest",
     "vue-router": "latest"
