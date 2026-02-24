@@ -13,10 +13,10 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@nuxt/eslint": "^0.7.6",
+    "@nuxt/eslint": "^1.15.2",
     "@pinia/nuxt": "^0.9.0",
     "cloudinary": "^2.7.0",
-    "eslint": "^9.17.0",
+    "eslint": "^10.0.2",
     "formidable": "^3.5.4",
     "mongodb": "^6.12.0",
     "nuxt": "^4.1.0",
